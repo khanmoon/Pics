@@ -1,16 +1,25 @@
 import SearchBar from "./SearchBar";
 import React from "react";
+import unsplash from "../api/usplash";
 import "semantic-ui-css/semantic.min.css";
+
 class App extends React.Component {
-  state = { data: "" };
-  onSearchSubmit = (e, d) => {
-    console.log(d);
+  state = { images: [] };
+  onSearchSubmit = async (term) => {
+    const response = await unsplash.get("/search/photos", {
+      params: {
+        query: term
+      }
+    });
+    this.setState({ images: response.data.results });
+    // f.then((s) => console.log(s));
     // this.setState({ data: e.target.value });
   };
   render() {
     return (
       <div className="App ui container" style={{ marginTop: "10px" }}>
         <SearchBar onSearchSubmit={this.onSearchSubmit} />
+        Found :{this.state.images.length}
       </div>
     );
   }
