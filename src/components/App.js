@@ -2,6 +2,7 @@ import SearchBar from "./SearchBar";
 import React from "react";
 import unsplash from "../api/usplash";
 import "semantic-ui-css/semantic.min.css";
+import ImageList from "./ImageList";
 
 class App extends React.Component {
   state = { images: [] };
@@ -20,6 +21,7 @@ class App extends React.Component {
       <div className="App ui container" style={{ marginTop: "10px" }}>
         <SearchBar onSearchSubmit={this.onSearchSubmit} />
         Found :{this.state.images.length}
+        <ImageList images={this.state.images} />
       </div>
     );
   }
